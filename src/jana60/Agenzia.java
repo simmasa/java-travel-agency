@@ -26,7 +26,7 @@ public class Agenzia {
                 try {
                     Vacanza vacanza1 =   new Vacanza(destinazione, dataInizio , dataFine);
                     System.out.println("Grazie.");
-                    System.out.println(vacanza1+".");
+                    System.out.println(vacanza1);
                 } catch (IllegalArgumentException e) {
                     System.out.println(e.getMessage());
                 } catch (DateTimeParseException e) {

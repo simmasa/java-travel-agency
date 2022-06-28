@@ -2,6 +2,7 @@ package jana60;
 
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -10,6 +11,8 @@ public class Vacanza {
     private String destinazione;
     private String dataInizio;
     private String dataFine;
+    private LocalDate inizio;
+    private LocalDate fine;
 
 
     //constructor
@@ -21,7 +24,14 @@ public class Vacanza {
         this.destinazione = destinazione;
         this.dataInizio = dataInizio;
         this.dataFine = dataFine;
+        this.inizio = LocalDate.parse(dataInizio, format);
+        this.fine = LocalDate.parse(dataFine, format);
+    }
 
+    public Vacanza(Vacanza vacanza) {
+        this.destinazione = vacanza.getDestinazione();
+        this.dataInizio = vacanza.dataInizio;
+        this.dataFine = vacanza.dataFine;
     }
 
     //getter/setter
@@ -74,10 +84,13 @@ public class Vacanza {
             throw new IllegalArgumentException("Il campo destinazione non può essere vuoto");
     }
     //altri
-
+    public String durata(String dataInizio, String dataFine) {
+        Period period = Period.between(inizio, fine);
+        return period.getDays()+" giorni.";
+    }
     @Override
     public String toString() {
-        return "Programmata vacanza a "+destinazione+" con partenza il "+dataInizio+" e ritorno il "+dataFine;
+        return "Programmata vacanza a "+destinazione+" con partenza il "+dataInizio+" e ritorno il "+dataFine+". Durata: "+durata(dataInizio , dataFine);
     }
 }
 
